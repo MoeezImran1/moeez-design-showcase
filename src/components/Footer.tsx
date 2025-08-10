@@ -60,12 +60,6 @@ const Footer = () => {
             </p>
             
             <div className="flex items-center gap-4">
-              <a 
-                href="/admin-login" 
-                className="text-text-muted hover:text-brand-green text-xs transition-colors opacity-50"
-              >
-                Admin
-              </a>
               <button
                 onClick={scrollToTop}
                 className="bg-surface hover:bg-surface-elevated border border-border rounded-full p-3 transition-all duration-300 hover:border-brand-green group"

@@ -1,4 +1,5 @@
 import { ArrowDown, Play } from 'lucide-react';
+import StatsSection from './StatsSection';
 
 const HeroSection = () => {
   const scrollToPortfolio = () => {
@@ -20,7 +21,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="animate-fade-in-up">
           {/* Main Title */}
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black font-poppins mb-6">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6" style={{ fontFamily: 'cursive' }}>
             <span className="text-gradient">MOEEZ</span>
             <br />
             <span className="text-foreground">IMRAN</span>
@@ -56,24 +57,7 @@ const HeroSection = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
-            <div className="text-center animate-scale-in" style={{ animationDelay: '0.5s' }}>
-              <div className="text-3xl md:text-4xl font-bold text-brand-green mb-2">500+</div>
-              <div className="text-text-muted text-sm">Thumbnails Created</div>
-            </div>
-            <div className="text-center animate-scale-in" style={{ animationDelay: '0.7s' }}>
-              <div className="text-3xl md:text-4xl font-bold text-brand-green mb-2">100+</div>
-              <div className="text-text-muted text-sm">Happy Clients</div>
-            </div>
-            <div className="text-center animate-scale-in" style={{ animationDelay: '0.9s' }}>
-              <div className="text-3xl md:text-4xl font-bold text-brand-green mb-2">24h</div>
-              <div className="text-text-muted text-sm">Fast Delivery</div>
-            </div>
-            <div className="text-center animate-scale-in" style={{ animationDelay: '1.1s' }}>
-              <div className="text-3xl md:text-4xl font-bold text-brand-green mb-2">5★</div>
-              <div className="text-text-muted text-sm">Rating</div>
-            </div>
-          </div>
+          <StatsSection />
         </div>
       </div>
 

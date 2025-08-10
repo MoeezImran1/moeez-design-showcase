@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, User, FolderOpen, Mail } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,10 +23,10 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'portfolio', label: 'Portfolio' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'home', label: 'Home', icon: Home },
+    { id: 'about', label: 'About', icon: User },
+    { id: 'portfolio', label: 'Portfolio', icon: FolderOpen },
+    { id: 'contact', label: 'Contact', icon: Mail },
   ];
 
   return (
@@ -47,15 +47,22 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-text-secondary hover:text-brand-green transition-colors duration-300 font-medium"
-              >
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="group relative text-text-secondary hover:text-brand-green transition-colors duration-300 font-medium"
+                  title={item.label}
+                >
+                  <IconComponent size={24} />
+                  <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-surface border border-border text-foreground text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {item.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Mobile Menu Button */}
@@ -70,15 +77,19 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-border pt-4 animate-fade-in">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left py-2 text-text-secondary hover:text-brand-green transition-colors duration-300 font-medium"
-              >
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="flex items-center gap-3 w-full text-left py-2 text-text-secondary hover:text-brand-green transition-colors duration-300 font-medium"
+                >
+                  <IconComponent size={20} />
+                  {item.label}
+                </button>
+              );
+            })}
           </div>
         )}
       </div>

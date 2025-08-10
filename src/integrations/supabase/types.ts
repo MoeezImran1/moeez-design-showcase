@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_credentials: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: number
+          password: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: number
+          password: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: number
+          password?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           budget: string | null
@@ -54,6 +78,7 @@ export type Database = {
           description: string | null
           id: number
           image_url: string
+          show_on_home: boolean | null
           title: string
           updated_at: string | null
         }
@@ -63,6 +88,7 @@ export type Database = {
           description?: string | null
           id?: number
           image_url: string
+          show_on_home?: boolean | null
           title: string
           updated_at?: string | null
         }
@@ -72,7 +98,38 @@ export type Database = {
           description?: string | null
           id?: number
           image_url?: string
+          show_on_home?: boolean | null
           title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      stats: {
+        Row: {
+          created_at: string | null
+          delivery_time: string | null
+          happy_clients: string | null
+          id: number
+          rating: string | null
+          thumbnails_created: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          delivery_time?: string | null
+          happy_clients?: string | null
+          id?: number
+          rating?: string | null
+          thumbnails_created?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          delivery_time?: string | null
+          happy_clients?: string | null
+          id?: number
+          rating?: string | null
+          thumbnails_created?: string | null
           updated_at?: string | null
         }
         Relationships: []

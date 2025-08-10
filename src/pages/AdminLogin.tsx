@@ -16,50 +16,34 @@ const AdminLogin = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Check hardcoded credentials
-    if (email === 'moeezdesignadmin@gmail.com' && password === 'Moeez@admin786..') {
-      try {
-        // Sign in with Supabase (create user if doesn't exist)
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password
-        });
+    try {
+      const { data: adminData, error } = await supabase
+        .from('admin_credentials')
+        .select('*')
+        .eq('email', email)
+        .eq('password', password)
+        .single();
 
-        if (error) {
-          // Try to sign up if user doesn't exist
-          const { error: signUpError } = await supabase.auth.signUp({
-            email,
-            password
-          });
-
-          if (signUpError) {
-            throw signUpError;
-          }
-        }
-
-        toast({
-          title: "Login successful!",
-          description: "Welcome to the admin panel.",
-        });
-
-        navigate('/admin');
-      } catch (error) {
-        console.error('Auth error:', error);
-        toast({
-          title: "Authentication error",
-          description: "Please try again.",
-          variant: "destructive",
-        });
+      if (error || !adminData) {
+        throw new Error('Invalid credentials');
       }
-    } else {
+
+      localStorage.setItem('admin_logged_in', 'true');
+      
+      toast({
+        title: "Login successful!",
+        description: "Welcome to the admin panel.",
+      });
+      navigate('/admin');
+    } catch (error) {
       toast({
         title: "Invalid credentials",
         description: "Please check your email and password.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (

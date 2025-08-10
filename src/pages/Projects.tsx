@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, ArrowLeft, FolderOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface Project {
   id: number;
@@ -11,7 +12,7 @@ interface Project {
   show_on_home: boolean;
 }
 
-const PortfolioSection = () => {
+const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -41,44 +42,44 @@ const PortfolioSection = () => {
   const categories = ['all', ...Array.from(new Set(projects.map(p => p.category)))];
   
   const filteredProjects = selectedCategory === 'all' 
-    ? projects.filter(p => p.show_on_home) 
-    : projects.filter(p => p.category === selectedCategory && p.show_on_home);
+    ? projects 
+    : projects.filter(p => p.category === selectedCategory);
 
   if (isLoading) {
     return (
-      <section id="portfolio" className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              My <span className="text-gradient">Portfolio</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="aspect-video bg-surface-elevated rounded-lg animate-pulse"></div>
-            ))}
-          </div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="loading-spinner mx-auto mb-4"></div>
+          <p className="text-text-muted">Loading projects...</p>
         </div>
-      </section>
+      </div>
     );
   }
 
   return (
-    <section id="portfolio" className="py-20">
-      <div className="container mx-auto px-6">
-        {/* Section Title */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            My <span className="text-gradient">Portfolio</span>
-          </h2>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-            A showcase of eye-catching thumbnails that drive engagement and boost click-through rates
-          </p>
-          <div className="w-24 h-1 bg-gradient-primary mx-auto mt-8"></div>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-surface border-b border-border sticky top-0 z-10">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center gap-4">
+            <Link 
+              to="/" 
+              className="btn-secondary flex items-center gap-2"
+            >
+              <ArrowLeft size={20} />
+              Back to Home
+            </Link>
+            <div>
+              <h1 className="text-2xl font-bold text-gradient">All Projects</h1>
+              <p className="text-text-muted">Complete portfolio collection</p>
+            </div>
+          </div>
         </div>
+      </header>
 
+      <div className="container mx-auto px-6 py-12">
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category) => (
             <button
               key={category}
@@ -94,8 +95,8 @@ const PortfolioSection = () => {
           ))}
         </div>
 
-        {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {filteredProjects.map((project, index) => (
             <div
               key={project.id}
@@ -118,7 +119,6 @@ const PortfolioSection = () => {
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">{project.title}</h3>
                       {project.description && (
                         <p className="text-text-muted text-sm">{project.description}</p>
                       )}
@@ -135,36 +135,30 @@ const PortfolioSection = () => {
                     {project.category}
                   </span>
                 </div>
+
+                {/* Show on Home Badge */}
+                {project.show_on_home && (
+                  <div className="absolute top-3 right-3">
+                    <span className="bg-brand-green/80 backdrop-blur-sm text-background text-xs font-medium px-2 py-1 rounded-full">
+                      Featured
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-          <h3 className="text-2xl font-bold mb-4">Want to see more?</h3>
-          <p className="text-text-secondary mb-8">Explore my complete portfolio collection</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/projects"
-              className="btn-primary"
-            >
-              View All Projects
-            </a>
-            <button 
-              onClick={() => {
-                const element = document.getElementById('contact');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="btn-secondary"
-            >
-              Start Your Project
-            </button>
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-12">
+            <FolderOpen className="mx-auto mb-4 text-text-muted" size={48} />
+            <h3 className="text-xl font-semibold mb-2">No projects found</h3>
+            <p className="text-text-muted">Try selecting a different category.</p>
           </div>
-        </div>
+        )}
       </div>
-    </section>
+    </div>
   );
 };
 
-export default PortfolioSection;
+export default Projects;

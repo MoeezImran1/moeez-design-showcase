@@ -47,7 +47,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
         </div>
         
         <p className="text-text-muted mt-4 text-sm">
-          {progress < 100 ? 'Loading portfolio...' : 'Welcome!'}
+          Loading portfolio...
         </p>
       </div>
     </div>
