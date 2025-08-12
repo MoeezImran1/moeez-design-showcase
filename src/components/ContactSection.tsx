@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, MessageCircle, Send, Clock, CheckCircle } from 'lucide-react';
+import SpotlightCard from './ui/SpotlightCard';
+import ScrollReveal from './ui/ScrollReveal';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -79,17 +81,36 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-surface">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-20 bg-surface relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-glow rounded-full animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-48 h-48 bg-gradient-glow rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Section Title */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
+          <div className="text-center mb-16">
+            <ScrollReveal 
+              baseOpacity={0}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={10}
+              containerClassName="mb-6"
+              textClassName="text-4xl md:text-6xl font-bold"
+            >
               Let's <span className="text-gradient">Work Together</span>
-            </h2>
-            <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+            </ScrollReveal>
+            <ScrollReveal 
+              baseOpacity={0.3}
+              enableBlur={true}
+              baseRotation={1}
+              blurStrength={4}
+              textClassName="text-xl text-text-secondary max-w-2xl mx-auto"
+            >
               Ready to create thumbnails that drive results? Get in touch and let's discuss your project!
-            </p>
+            </ScrollReveal>
             <div className="w-24 h-1 bg-gradient-primary mx-auto mt-8"></div>
           </div>
 
@@ -100,8 +121,8 @@ const ContactSection = () => {
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="bg-brand-green/10 p-3 rounded-lg">
-                    <Mail className="text-brand-green" size={24} />
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <Mail className="text-primary" size={24} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Email Me</h4>
@@ -110,8 +131,8 @@ const ContactSection = () => {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="bg-brand-green/10 p-3 rounded-lg">
-                    <Clock className="text-brand-green" size={24} />
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <Clock className="text-primary" size={24} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Response Time</h4>
@@ -120,8 +141,8 @@ const ContactSection = () => {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="bg-brand-green/10 p-3 rounded-lg">
-                    <CheckCircle className="text-brand-green" size={24} />
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <CheckCircle className="text-primary" size={24} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">What I Provide</h4>
@@ -138,7 +159,11 @@ const ContactSection = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <SpotlightCard 
+              className="p-8 animate-fade-in"
+              style={{ animationDelay: '0.3s' }}
+              spotlightColor="rgba(82, 39, 255, 0.15)"
+            >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
@@ -152,7 +177,7 @@ const ContactSection = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                       placeholder="Your name"
                     />
                   </div>
@@ -168,7 +193,7 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -184,7 +209,7 @@ const ContactSection = () => {
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                     >
                       <option value="">Select a service</option>
                       {services.map((service) => (
@@ -202,7 +227,7 @@ const ContactSection = () => {
                       name="budget"
                       value={formData.budget}
                       onChange={handleChange}
-                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                     >
                       <option value="">Select budget</option>
                       {budgetRanges.map((range) => (
@@ -223,7 +248,7 @@ const ContactSection = () => {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors resize-none"
+                    className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none"
                     placeholder="Tell me about your project, content type, style preferences, and any specific requirements..."
                   />
                 </div>
@@ -246,7 +271,7 @@ const ContactSection = () => {
                   )}
                 </button>
               </form>
-            </div>
+            </SpotlightCard>
           </div>
         </div>
       </div>

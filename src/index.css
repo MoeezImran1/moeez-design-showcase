@@ -9,29 +9,30 @@
 @layer base {
   :root {
     /* Brand Colors */
-    --brand-green: 81 100% 51%; /* #9aff03 */
-    --brand-green-dark: 81 100% 45%;
-    --brand-green-light: 81 100% 70%;
+    --brand-primary: 263 82% 57%; /* #5227FF */
+    --brand-primary-dark: 263 82% 50%;
+    --brand-primary-light: 263 82% 65%;
+    --brand-secondary: 257 15% 18%; /* #271e37 */
     
     /* Background & Surface */
-    --background: 0 0% 6%; /* Dark background */
-    --surface: 0 0% 10%;
-    --surface-elevated: 0 0% 12%;
+    --background: 257 15% 10%; /* Dark purple background */
+    --surface: 257 15% 15%;
+    --surface-elevated: 257 15% 20%;
     --foreground: 0 0% 95%;
     
     /* Card System */
-    --card: 0 0% 8%;
+    --card: 257 15% 12%;
     --card-foreground: 0 0% 95%;
-    --card-hover: 0 0% 12%;
+    --card-hover: 257 15% 18%;
     
     /* Interactive Elements */
-    --primary: 81 100% 51%; /* Brand green */
-    --primary-foreground: 0 0% 10%;
-    --primary-hover: 81 100% 45%;
+    --primary: 263 82% 57%; /* Brand purple */
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 263 82% 50%;
     
-    --secondary: 0 0% 15%;
+    --secondary: 257 15% 18%;
     --secondary-foreground: 0 0% 90%;
-    --secondary-hover: 0 0% 20%;
+    --secondary-hover: 257 15% 25%;
     
     /* Text Colors */
     --text-primary: 0 0% 95%;
@@ -39,10 +40,10 @@
     --text-muted: 0 0% 50%;
     
     /* Utility Colors */
-    --border: 0 0% 20%;
-    --border-light: 0 0% 25%;
-    --input: 0 0% 15%;
-    --ring: 81 100% 51%;
+    --border: 257 15% 25%;
+    --border-light: 257 15% 30%;
+    --input: 257 15% 18%;
+    --ring: 263 82% 57%;
     
     /* Status Colors */
     --success: 120 60% 50%;
@@ -50,15 +51,15 @@
     --error: 0 70% 60%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--brand-green)) 0%, hsl(var(--brand-green-dark)) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--brand-primary)) 0%, hsl(var(--brand-primary-dark)) 100%);
     --gradient-dark: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--surface)) 100%);
-    --gradient-glow: radial-gradient(circle at center, hsl(var(--brand-green) / 0.3) 0%, transparent 70%);
+    --gradient-glow: radial-gradient(circle at center, hsl(var(--brand-primary) / 0.3) 0%, transparent 70%);
     
     /* Shadows */
     --shadow-sm: 0 1px 3px hsl(var(--background) / 0.2);
     --shadow-md: 0 4px 12px hsl(var(--background) / 0.3);
     --shadow-lg: 0 10px 30px hsl(var(--background) / 0.4);
-    --shadow-glow: 0 0 30px hsl(var(--brand-green) / 0.3);
+    --shadow-glow: 0 0 30px hsl(var(--brand-primary) / 0.3);
     --shadow-thumbnail: 0 8px 25px hsl(var(--background) / 0.6);
     
     /* Animation Variables */
@@ -92,12 +93,12 @@
   }
   
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--brand-green));
+    background: hsl(var(--brand-primary));
     border-radius: 4px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--brand-green-dark));
+    background: hsl(var(--brand-primary-dark));
   }
 }
 

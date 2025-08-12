@@ -1,5 +1,6 @@
 import { ArrowDown, Play } from 'lucide-react';
 import StatsSection from './StatsSection';
+import DotGrid from './ui/DotGrid';
 
 const HeroSection = () => {
   const scrollToPortfolio = () => {
@@ -11,11 +12,19 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background Elements */}
+      {/* Interactive Dot Grid Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-glow rounded-full opacity-30 animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-gradient-glow rounded-full opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-glow rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <DotGrid
+          dotSize={10}
+          gap={15}
+          baseColor="#5227FF"
+          activeColor="#5227FF"
+          proximity={120}
+          shockRadius={250}
+          shockStrength={5}
+          resistance={750}
+          returnDuration={1.5}
+        />
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10">

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { ExternalLink } from 'lucide-react';
+import SpotlightCard from './ui/SpotlightCard';
+import ScrollReveal from './ui/ScrollReveal';
 
 interface Project {
   id: number;
@@ -67,13 +69,26 @@ const PortfolioSection = () => {
     <section id="portfolio" className="py-20">
       <div className="container mx-auto px-6">
         {/* Section Title */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+        <div className="text-center mb-16">
+          <ScrollReveal 
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={8}
+            containerClassName="mb-6"
+            textClassName="text-4xl md:text-6xl font-bold"
+          >
             My <span className="text-gradient">Portfolio</span>
-          </h2>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+          </ScrollReveal>
+          <ScrollReveal 
+            baseOpacity={0.3}
+            enableBlur={true}
+            baseRotation={1}
+            blurStrength={4}
+            textClassName="text-xl text-text-secondary max-w-2xl mx-auto"
+          >
             A showcase of eye-catching thumbnails that drive engagement and boost click-through rates
-          </p>
+          </ScrollReveal>
           <div className="w-24 h-1 bg-gradient-primary mx-auto mt-8"></div>
         </div>
 
@@ -85,7 +100,7 @@ const PortfolioSection = () => {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
                 selectedCategory === category
-                  ? 'bg-brand-green text-background'
+                  ? 'bg-primary text-background'
                   : 'bg-surface text-text-secondary hover:bg-surface-elevated hover:text-foreground'
               }`}
             >
@@ -97,12 +112,14 @@ const PortfolioSection = () => {
         {/* Portfolio Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <div
+            <SpotlightCard
               key={project.id}
-              className="group cursor-pointer animate-scale-in"
+              className="group cursor-pointer animate-scale-in overflow-hidden thumbnail-hover"
               style={{ animationDelay: `${0.1 * index}s` }}
+              spotlightColor="rgba(82, 39, 255, 0.15)"
             >
-              <div className="relative overflow-hidden rounded-lg bg-card border border-border hover:border-brand-green transition-all duration-300 thumbnail-hover">
+              <div className="relative overflow-hidden rounded-lg"
+              >
                 {/* Thumbnail Image */}
                 <div className="aspect-video relative">
                   <img
@@ -123,20 +140,20 @@ const PortfolioSection = () => {
                         <p className="text-text-muted text-sm">{project.description}</p>
                       )}
                     </div>
-                    <div className="bg-brand-green/20 backdrop-blur-sm p-2 rounded-full">
-                      <ExternalLink className="text-brand-green" size={16} />
+                    <div className="bg-primary/20 backdrop-blur-sm p-2 rounded-full">
+                      <ExternalLink className="text-primary" size={16} />
                     </div>
                   </div>
                 </div>
 
                 {/* Category Badge */}
                 <div className="absolute top-3 left-3">
-                  <span className="bg-background/80 backdrop-blur-sm text-brand-green text-xs font-medium px-3 py-1 rounded-full">
+                  <span className="bg-background/80 backdrop-blur-sm text-primary text-xs font-medium px-3 py-1 rounded-full">
                     {project.category}
                   </span>
                 </div>
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 
