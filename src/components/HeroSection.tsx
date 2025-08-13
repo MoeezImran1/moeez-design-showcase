@@ -11,47 +11,45 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
       {/* Interactive Dot Grid Background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 opacity-30">
         <DotGrid
-          dotSize={10}
-          gap={15}
+          dotSize={8}
+          gap={25}
           baseColor="#5227FF"
           activeColor="#5227FF"
-          proximity={120}
-          shockRadius={250}
-          shockStrength={5}
-          resistance={750}
-          returnDuration={1.5}
+          proximity={100}
+          shockRadius={200}
+          shockStrength={3}
+          resistance={500}
+          returnDuration={1.2}
         />
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <div className="animate-fade-in-up">
+      <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
+        <div className="animate-fade-in-up max-w-5xl mx-auto">
           {/* Main Title */}
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6" style={{ fontFamily: 'cursive' }}>
-            <span className="text-gradient">MOEEZ</span>
-            <br />
-            <span className="text-foreground">IMRAN</span>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-4 sm:mb-6 leading-tight" style={{ fontFamily: 'cursive' }}>
+            <span className="text-gradient block">MOEEZ</span>
+            <span className="text-foreground block">IMRAN</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-3xl font-light text-text-secondary mb-8 max-w-3xl mx-auto leading-relaxed">
-            Professional <span className="text-brand-green font-semibold">Thumbnail Designer</span>
-            <br />
-            Creating eye-catching designs that boost your content's performance
-          </p>
+          <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-light text-muted-foreground mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4">
+            <p className="mb-2">Professional <span className="text-primary font-semibold">Thumbnail Designer</span></p>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl">Creating eye-catching designs that boost your content's performance</p>
+          </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 px-4">
             <button 
               onClick={scrollToPortfolio}
-              className="btn-primary group flex items-center gap-2"
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 group"
             >
-              <Play size={20} />
+              <Play size={18} />
               View My Work
-              <ArrowDown size={16} className="group-hover:translate-y-1 transition-transform" />
+              <ArrowDown size={14} className="group-hover:translate-y-1 transition-transform" />
             </button>
             
             <button 
@@ -59,20 +57,22 @@ const HeroSection = () => {
                 const element = document.getElementById('contact');
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="btn-secondary"
+              className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6 py-3 rounded-lg font-medium transition-all duration-300"
             >
               Get In Touch
             </button>
           </div>
 
           {/* Stats */}
-          <StatsSection />
+          <div className="px-4">
+            <StatsSection />
+          </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ArrowDown className="text-brand-green" size={24} />
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <ArrowDown className="text-primary" size={20} />
       </div>
     </section>
   );

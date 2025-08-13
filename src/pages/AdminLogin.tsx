@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('moeezdesignadmin@gmail.com');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('Moeez@admin786..');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -25,7 +25,13 @@ const AdminLogin = () => {
         .single();
 
       if (error || !adminData) {
-        throw new Error('Invalid credentials');
+        toast({
+          title: "Invalid credentials",
+          description: "Incorrect email or password. Please try again.",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
       }
 
       localStorage.setItem('admin_logged_in', 'true');
@@ -37,11 +43,10 @@ const AdminLogin = () => {
       navigate('/admin');
     } catch (error) {
       toast({
-        title: "Invalid credentials",
-        description: "Please check your email and password.",
+        title: "Login failed",
+        description: "An error occurred. Please try again.",
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };

@@ -189,40 +189,28 @@ const DotGrid: React.FC<DotGridProps> = ({
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
-      const now = performance.now();
+      const rect = canvasRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      
       const pr = pointerRef.current;
-      const dt = pr.lastTime ? now - pr.lastTime : 16;
-      const dx = e.clientX - pr.lastX;
-      const dy = e.clientY - pr.lastY;
-      let vx = (dx / dt) * 1000;
-      let vy = (dy / dt) * 1000;
-      let speed = Math.hypot(vx, vy);
-      if (speed > maxSpeed) {
-        const scale = maxSpeed / speed;
-        vx *= scale;
-        vy *= scale;
-        speed = maxSpeed;
-      }
-      pr.lastTime = now;
-      pr.lastX = e.clientX;
-      pr.lastY = e.clientY;
-      pr.vx = vx;
-      pr.vy = vy;
-      pr.speed = speed;
-
-      const rect = canvasRef.current!.getBoundingClientRect();
       pr.x = e.clientX - rect.left;
       pr.y = e.clientY - rect.top;
 
+      // Simple hover effect - no inertia or complex animations
       for (const dot of dotsRef.current) {
         const dist = Math.hypot(dot.cx - pr.x, dot.cy - pr.y);
-        if (speed > speedTrigger && dist < proximity && !dot._inertiaApplied) {
+        if (dist < proximity && !dot._inertiaApplied) {
           dot._inertiaApplied = true;
           gsap.killTweensOf(dot);
-          const pushX = dot.cx - pr.x + vx * 0.005;
-          const pushY = dot.cy - pr.y + vy * 0.005;
+          
+          // Gentle push effect
+          const pushFactor = Math.max(0, 1 - dist / proximity) * 20;
+          const angle = Math.atan2(dot.cy - pr.y, dot.cx - pr.x);
+          const pushX = Math.cos(angle) * pushFactor;
+          const pushY = Math.sin(angle) * pushFactor;
+          
           gsap.to(dot, {
-            duration: 1,
+            duration: 0.3,
             xOffset: pushX,
             yOffset: pushY,
             ease: "power2.out",
