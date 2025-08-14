@@ -20,11 +20,11 @@ const Footer = () => {
           {/* Contact */}
           <div className="mb-8">
             <a 
-              href="mailto:moeezdesigner@gmail.com"
+              href="mailto:moeezdesign@gmail.com"
               className="inline-flex items-center gap-2 text-brand-green hover:text-brand-green-light transition-colors"
             >
               <Mail size={20} />
-              moeezdesigner@gmail.com
+              moeezdesign@gmail.com
             </a>
           </div>
 
