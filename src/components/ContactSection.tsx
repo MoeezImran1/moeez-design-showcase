@@ -6,40 +6,51 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import ScrollReveal from './ui/ScrollReveal';
 import SpotlightCard from './ui/SpotlightCard';
-
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
       title: "Message sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
+      description: "Thank you for your message. I'll get back to you soon."
     });
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
-
-  const benefits = [
-    { icon: CheckCircle, text: "500+ Successful Designs", color: "text-green-400" },
-    { icon: Clock, text: "24h Fast Delivery", color: "text-blue-400" },
-    { icon: Users, text: "100+ Happy Clients", color: "text-purple-400" },
-    { icon: Award, text: "5★ Quality Rating", color: "text-yellow-400" }
-  ];
-
-  return (
-    <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-secondary/20">
+  const benefits = [{
+    icon: CheckCircle,
+    text: "500+ Successful Designs",
+    color: "text-green-400"
+  }, {
+    icon: Clock,
+    text: "24h Fast Delivery",
+    color: "text-blue-400"
+  }, {
+    icon: Users,
+    text: "100+ Happy Clients",
+    color: "text-purple-400"
+  }, {
+    icon: Award,
+    text: "5★ Quality Rating",
+    color: "text-yellow-400"
+  }];
+  return <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-secondary/20">
       <div className="container mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
@@ -79,7 +90,7 @@ const ContactSection = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-foreground text-sm sm:text-base">Phone</p>
-                      <p className="text-muted-foreground text-sm">+92 XXX XXXXXXX</p>
+                      <p className="text-muted-foreground text-sm">+92 3278610021</p>
                     </div>
                   </div>
                 </SpotlightCard>
@@ -103,14 +114,12 @@ const ContactSection = () => {
               <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-4 sm:p-6 rounded-xl border border-border/50 backdrop-blur-sm">
                 <h4 className="text-lg sm:text-xl font-bold text-foreground mb-4 sm:mb-6">Why Choose Me?</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4">
-                  {benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-center gap-3">
+                  {benefits.map((benefit, index) => <div key={index} className="flex items-center gap-3">
                       <div className="p-1.5 rounded-lg bg-background/50">
                         <benefit.icon className={`${benefit.color} flex-shrink-0`} size={16} />
                       </div>
                       <span className="text-muted-foreground text-sm sm:text-base">{benefit.text}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
             </SpotlightCard>
@@ -127,32 +136,14 @@ const ContactSection = () => {
                       <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                         Full Name
                       </label>
-                      <Input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="Your full name"
-                        className="bg-background/50 border-border/50 focus:border-primary transition-colors"
-                      />
+                      <Input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Your full name" className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
                     </div>
                     
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                         Email Address
                       </label>
-                      <Input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="your@email.com"
-                        className="bg-background/50 border-border/50 focus:border-primary transition-colors"
-                      />
+                      <Input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" className="bg-background/50 border-border/50 focus:border-primary transition-colors" />
                     </div>
                   </div>
                   
@@ -160,22 +151,10 @@ const ContactSection = () => {
                     <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                       Project Details
                     </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      placeholder="Tell me about your project, style preferences, and any specific requirements..."
-                      rows={6}
-                      className="bg-background/50 border-border/50 focus:border-primary resize-none transition-colors"
-                    />
+                    <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required placeholder="Tell me about your project, style preferences, and any specific requirements..." rows={6} className="bg-background/50 border-border/50 focus:border-primary resize-none transition-colors" />
                   </div>
                   
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 group"
-                  >
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 group">
                     <Send size={18} className="group-hover:translate-x-1 transition-transform" />
                     Send Message
                   </Button>
@@ -185,8 +164,6 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactSection;
